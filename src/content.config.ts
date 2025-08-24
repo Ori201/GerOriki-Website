@@ -1,5 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { string } from 'astro:schema';
 
 export const collections = {
 	work: defineCollection({
@@ -7,11 +8,33 @@ export const collections = {
 		loader: glob({ base: './src/content/work', pattern: '**/*.md' }),
 		schema: z.object({
 			title: z.string(),
-			description: z.string(),
+			title_heb: z.string().optional(),
+			description: z.string().optional(),
 			publishDate: z.coerce.date(),
 			tags: z.array(z.string()),
 			img: z.string(),
 			img_alt: z.string().optional(),
+			video: z.string().optional(),
+			websiteX: z.string().optional(),
+			version: z.string().optional(),
+			creatorName: z.string().optional(),
+		}),
+	}),
+
+	betaGames: defineCollection({
+		// Load Markdown files in the src/content/work directory.
+		loader: glob({ base: './src/content/betaGames', pattern: '**/*.md' }),
+		schema: z.object({
+			title: z.string(),
+			title_heb: z.string().optional(),
+			description: z.string().optional(),
+			publishDate: z.coerce.date(),
+			tags: z.array(z.string()),
+			img: z.string(),
+			img_alt: z.string().optional(),
+			video: z.string().optional(),
+			info_img: z.string().optional(),
+			game_link: z.string().optional(),
 		}),
 	}),
 };

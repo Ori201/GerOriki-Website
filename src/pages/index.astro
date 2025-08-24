@@ -3,33 +3,35 @@ import { getCollection } from 'astro:content';
 // Component Imports
 import CallToAction from '../components/CallToAction.astro';
 // Page section components
-import ContactCTA from '../components/ContactCTA.astro';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
-import Skills from '../components/Skills.astro';
+import BetaPreview from '../components/BetaPreview.astro';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 // Content Fetching: List four most recent work projects
 const projects = (await getCollection('work'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
-	.slice(0, 4);
+	.slice(0, 2);
+
+const betaProjects = (await getCollection('betaGames'))
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+	.slice(0, 2);
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/basics/astro-components/
 ---
 
 <BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
+	<div class="stack gap-20 lg:gap-48" dir="rtl">
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Hello, my name is Jeanine White"
-					tagline="I am a Creative Developer who is currently based in Portland, Oregon."
-					align="start"
+					title="GerOriki"
+					align="center"
 				>
 					<div class="roles">
 						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
@@ -37,42 +39,31 @@ const projects = (await getCollection('work'))
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
 					</div>
 				</Hero>
-
-				<img
-					alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
-					width="480"
-					height="620"
-					src="/assets/portrait.jpg"
-				/>
 			</header>
-
-			<Skills />
 		</div>
 
 		<main class="wrapper stack gap-20 lg:gap-48">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
+					<h3 class="text-right">תרגומים ומשחקים</h3>
+					<p class="text-right">כמה מהמפות/תרגומים שיצרתי...</p>
 				</header>
 
 				<div class="gallery">
 					<Grid variant="offset">
 						{
-							projects.map((project) => (
+							/*[...projects.map((project) => (
 								<li>
 									<PortfolioPreview project={project} />
 								</li>
-							))
+							)),*/
+							[...betaProjects.map((project) => (
+								<li>
+									<BetaPreview project={project} />
+								</li>
+							))]
 						}
 					</Grid>
-				</div>
-
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
 				</div>
 			</section>
 
@@ -98,8 +89,6 @@ const projects = (await getCollection('work'))
 				</div>
 			</section>
 		</main>
-
-		<ContactCTA />
 	</div>
 </BaseLayout>
 
@@ -115,17 +104,8 @@ const projects = (await getCollection('work'))
 		display: none;
 	}
 
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
-	}
-
 	@media (min-width: 50em) {
 		.hero {
-			display: grid;
 			grid-template-columns: 6fr 4fr;
 			padding-inline: 2.5rem;
 			gap: 3.75rem;
@@ -133,14 +113,7 @@ const projects = (await getCollection('work'))
 
 		.roles {
 			margin-top: 0.5rem;
-			display: flex;
 			gap: 0.5rem;
-		}
-
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
 		}
 	}
 

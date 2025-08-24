@@ -1,0 +1,219 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import "tailwindcss";
+
+import Hero from '../../components/Hero.astro';
+import Icon from '../../components/Icon.astro';
+import Pill from '../../components/Pill.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+interface Props {
+	entry: CollectionEntry<'betaGames'>;
+}
+
+// This is a dynamic route that generates a page for every Markdown file in src/content/
+// Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
+// https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
+export async function getStaticPaths() {
+	const work = await getCollection('betaGames');
+	return work.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+	<div class="stack gap-2" dir="rtl">
+		<div class="wrapper stack gap-2">
+			<a class="back-link" href="/beta-games/">חזרה</a>
+			<Hero title={entry.data.title_heb ?? entry.data.title} align="start">
+				<div class="details">
+					<div class="tags">
+						{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+					</div>
+					<p class="description">{entry.data.description ?? ""}</p>
+				</div>
+			</Hero>
+		</div>
+		<main class="wrapper">
+			<div class="window-container">
+
+				<div class="image-section">
+				{entry.data.img && <img src={entry.data.info_img ?? entry.data.img} alt={entry.data.img_alt || ''} class="rounded-image w-96">}
+				</div>
+
+				<div class="flex justify-center mt-4">
+				{entry.data.game_link &&
+					<form target="_blank" action={entry.data.game_link}>
+						<input class="font-bold text-xl italic cta-button" type="submit" value="שחק עכשיו!" />
+					</form>
+					||
+					<button class="font-bold text-xl italic cta-button">לא ניתן לשחק כעת</button>
+				}
+				</div>
+
+			</div>
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+
+	.window-container {
+		background-color: rgb(245, 245, 245);
+		border-radius: 20px;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+		overflow: hidden;
+		width: 60%;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		margin-inline:auto;
+		margin-bottom: 25px;
+    }
+
+	.image-section {
+		flex: 1;
+		padding: 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.rounded-image {
+		border-radius: 20px;
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+		transition: transform 0.3s ease;
+	}
+
+	.rounded-image:hover {
+		transform: scale(1.05);
+	}
+
+	.cta-button {
+		background: linear-gradient(135deg, #6e6e6e, #4b4b4b);
+		color: white;
+		border: none;
+		padding: 15px 65px;
+		border-radius: 25px;
+		cursor: pointer;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		transition: all 0.3s ease;
+		align-self: flex-start;
+	}
+
+	.cta-button:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+	}
+
+	@media (max-width: 768px) {
+		.window-container {
+			flex-direction: column;
+			margin: 10px;
+		}
+
+		.text-section, .image-section {
+			flex: none;
+		}
+
+		.text-section h2 {
+			font-size: 24px;
+		}
+	}
+
+		header {
+		padding-bottom: 2.5rem;
+		border-bottom: 1px solid var(--gray-800);
+	}
+
+	.back-link {
+		display: none;
+	}
+
+	.details {
+		display: flex;
+		flex-direction: column;
+		padding: 0.5rem;
+		gap: 1.5rem;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.tags {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	.description {
+		font-size: var(--text-lg);
+		max-width: 54ch;
+	}
+
+	.content {
+		max-width: 65ch;
+		margin-inline: auto;
+	}
+
+	.content > :global(* + *) {
+		margin-top: 1rem;
+	}
+
+	.content :global(h1),
+	.content :global(h2),
+	.content :global(h3),
+	.content :global(h4),
+	.content :global(h5) {
+		margin: 1.5rem 0;
+	}
+
+	.content :global(img) {
+		border-radius: 1.5rem;
+		box-shadow: var(--shadow-sm);
+		background: var(--gradient-subtle);
+		border: 1px solid var(--gray-800);
+	}
+
+	.content :global(blockquote) {
+		font-size: var(--text-lg);
+		font-family: var(--font-brand);
+		font-weight: 600;
+		line-height: 1.1;
+		padding-inline-start: 1.5rem;
+		border-inline-start: 0.25rem solid var(--accent-dark);
+		color: var(--gray-0);
+	}
+
+	.back-link,
+	.content :global(a) {
+		text-decoration: 1px solid underline transparent;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color var(--theme-transition);
+	}
+
+	.back-link:hover,
+	.back-link:focus,
+	.content :global(a:hover),
+	.content :global(a:focus) {
+		text-decoration-color: currentColor;
+	}
+
+	@media (min-width: 50em) {
+		.back-link {
+			display: block;
+			align-self: flex-start;
+		}
+
+		.details {
+			flex-direction: row;
+			gap: 2.5rem;
+		}
+
+		.content :global(blockquote) {
+			font-size: var(--text-2xl);
+		}
+	}
+</style>
