@@ -65,18 +65,21 @@ const { Content } = await render(entry);
 				<div class="text-section">
 					<h4>יוצר ה{entry.data.type}</h4>
 
-					{entry.data.youtube &&
-						<p class="inline"><Icon icon="youtube-logo" size="1.2em"/><a target="_blank" rel="noopener noreferrer" href={entry.data.youtube}>{entry.data.creatorName ?? "לחץ כאן"}</a></p>
-					}
-					{entry.data.websiteX &&
-						<p class="inline"><Icon icon="x-logo" size="1.2em"/><a target="_blank" rel="noopener noreferrer" href={entry.data.websiteX}>{entry.data.creatorName ?? "לחץ כאן"}</a></p>
-					}
-					{entry.data.ko_fi &&
-						<p class="inline"><Icon icon="ko-fi-logo" size="1.2em"/><a target="_blank" rel="noopener noreferrer" href={entry.data.ko_fi}>{entry.data.creatorName ?? "לחץ כאן"}</a></p>
-					}
+					{[
+					{ icon: "youtube-logo", url: entry.data.youtube },
+					{ icon: "x-logo", url: entry.data.websiteX },
+					{ icon: "ko-fi-logo", url: entry.data.ko_fi }
+					].filter(link => link.url).map(({icon, url}) => (
+						<p class="inline">
+						<Icon icon={icon} size="1.2em"/>
+							<a target="_blank" rel="noopener noreferrer nofollow" href={url}>
+								{entry.data.creatorName ?? "לחץ כאן"}
+							</a>
+						</p>
+					))}
 
 					<Content />
-					
+
 					<div class="rounded-image buttons">
 						{entry.data.downloadFile &&
 							<a href={entry.data.downloadFile} target="_blank" download class="cta-button">
@@ -137,7 +140,8 @@ const { Content } = await render(entry);
 	.buttons {
 		background-color: #73efff6e;
 		display: grid;
-		margin: 25px;
+		margin-left: 25px;
+		margin-right: 25px;
 		margin-top: 30px;
 	}
 	.swiper {
@@ -145,13 +149,8 @@ const { Content } = await render(entry);
 		aspect-ratio: 16/9;
 	}
 
-	img {
-		width: 600px;
-		height: 100%;
-	}
-
-	iframe {
-		width: 600px;
+	img, iframe {
+		max-width: 100%;
 		height: 100%;
 	}
 
@@ -199,7 +198,9 @@ const { Content } = await render(entry);
 
 	.image-section {
 		flex: 1;
-		padding: 8%;
+		padding-left: 8%;
+		padding-right: 8%;
+		padding-bottom: 8%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
