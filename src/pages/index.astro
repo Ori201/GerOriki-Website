@@ -7,13 +7,13 @@ import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
+import TranslationsPreview from '../components/TranslationsPreview.astro';
 import BetaPreview from '../components/BetaPreview.astro';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Content Fetching: List four most recent work projects
-const projects = (await getCollection('work'))
+// Content Fetching: List four most recent translations projects
+const projects = (await getCollection('translations'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 2);
 
@@ -33,58 +33,32 @@ const betaProjects = (await getCollection('betaGames'))
 					title="GerOriki"
 					align="center"
 				>
-					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
-					</div>
+				<img draggable="false" style="align-self: center;" width="160" height="160" src="/assets/Hello_GerOriki.png">
 				</Hero>
 			</header>
 		</div>
 
-		<main class="wrapper stack gap-20 lg:gap-48">
+		<main class="wrapper stack gap-10 lg:gap-48">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3 class="text-right">תרגומים ומשחקים</h3>
-					<p class="text-right">כמה מהמפות/תרגומים שיצרתי...</p>
+					<p class="text-right">חלק מהמשחקים שיצרתי והדברים שתרגמתי...</p>
 				</header>
 
 				<div class="gallery">
 					<Grid variant="offset">
-						{
-							/*[...projects.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							)),*/
-							[...betaProjects.map((project) => (
-								<li>
-									<BetaPreview project={project} />
-								</li>
-							))]
-						}
-					</Grid>
-				</div>
-			</section>
-
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
-					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
-					</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="small">
-						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
-								<li class="mention-card">
-									<p>{brand}</p>
-								</li>
-							))
-						}
+						<>
+						{projects.map((project) => (
+							<li>
+							<TranslationsPreview project={project} />
+							</li>
+						))}
+						{betaProjects.map((project) => (
+							<li>
+							<BetaPreview project={project} />
+							</li>
+						))}
+						</>
 					</Grid>
 				</div>
 			</section>
@@ -219,4 +193,19 @@ const betaProjects = (await getCollection('betaGames'))
 			height: 9.5rem;
 		}
 	}
+
+	.side-image {
+		position: fixed;
+		top: 50%;
+		left: 0;
+		rotate: 60deg;
+		transform: translateY(-50%);
+		transform: translateX(-60%);
+		width: 80px;
+		height: auto;
+		z-index: 1000;
+		user-select: none;
+		-webkit-user-drag: none;
+	}
+
 </style>

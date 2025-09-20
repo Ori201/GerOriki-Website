@@ -2,13 +2,27 @@
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import "tailwindcss";
 
+
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
+import { Swiper, SwiperWrapper, SwiperSlide, SwiperButtonPrev, SwiperButtonNext } from "astro-swiper";
+import type { AstroSwiperType } from "astro-swiper";
+
+const astroSwiperOptions: AstroSwiperType = {
+  options: {
+    loop: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  },
+};
+
 interface Props {
-	entry: CollectionEntry<'work'>;
+	entry: CollectionEntry<'translations'>;
 }
 
 // TODO הקובץ שיהיה צריך להוריד יהיה קובץ zip עם סיסמה שבתוכו יהיה DataPack וכך אני אמנע את בעיית זכויות היוצרים. אני אבקש להוריד את המפה בנפרד
@@ -16,8 +30,8 @@ interface Props {
 // Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
 // https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
 export async function getStaticPaths() {
-	const work = await getCollection('work');
-	return work.map((entry) => ({
+	const translations = await getCollection('translations');
+	return translations.map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry },
 	}));
@@ -49,18 +63,69 @@ const { Content } = await render(entry);
 			<div class="window-container">
 
 				<div class="text-section">
-					<h4>יוצר המפה</h4>
+					<h4>יוצר ה{entry.data.type}</h4>
+
+					{entry.data.youtube &&
+						<p class="inline"><Icon icon="youtube-logo" size="1.2em"/><a target="_blank" rel="noopener noreferrer" href={entry.data.youtube}>{entry.data.creatorName ?? "לחץ כאן"}</a></p>
+					}
 					{entry.data.websiteX &&
-						<p class="inline"><Icon icon="twitter-logo" size="1.2em"/><a target="_blank" rel="noopener noreferrer" href={entry.data.websiteX}>{entry.data.creatorName ?? "לחץ כאן"}</a></p>
+						<p class="inline"><Icon icon="x-logo" size="1.2em"/><a target="_blank" rel="noopener noreferrer" href={entry.data.websiteX}>{entry.data.creatorName ?? "לחץ כאן"}</a></p>
+					}
+					{entry.data.ko_fi &&
+						<p class="inline"><Icon icon="ko-fi-logo" size="1.2em"/><a target="_blank" rel="noopener noreferrer" href={entry.data.ko_fi}>{entry.data.creatorName ?? "לחץ כאן"}</a></p>
 					}
 
 					<Content />
-
-					<button class="cta-button">לחץ כאן</button>
+					
+					<div class="rounded-image buttons">
+						{entry.data.downloadFile &&
+							<a href={entry.data.downloadFile} target="_blank" download class="cta-button">
+								הורדת ה{entry.data.type}
+							</a>
+						}
+						{entry.data.translatePack &&
+							<a href={entry.data.translatePack} target="_blank" download class="cta-button">
+								הורדת התרגום (חבילת משאבים)
+							</a>
+						}
+					</div>
 				</div>
 
 				<div class="image-section">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} class="rounded-image">}
+					<Swiper options={astroSwiperOptions.options} class="rounded-image not-content">
+						<!-- Additional required wrapper -->
+						<SwiperWrapper>
+							<!-- Slides -->
+							{entry.data.youtube_video &&
+								<SwiperSlide>
+									<iframe
+									width="850"
+									height="478"
+									src={entry.data.youtube_video}
+									allow="
+										accelerometer;
+										autoplay;
+										clipboard-write;
+										encrypted-media;
+										gyroscope;
+										picture-in-picture;
+										web-share"
+									referrerpolicy="strict-origin-when-cross-origin"
+									allowfullscreen
+									></iframe>
+								</SwiperSlide>
+							}
+							{entry.data.img &&
+								<SwiperSlide>
+									<img src={entry.data.img} alt={entry.data.img_alt || ''}>
+								</SwiperSlide>
+							}
+						</SwiperWrapper>
+
+						<!-- navigation buttons -->
+						<SwiperButtonPrev />
+						<SwiperButtonNext />
+					</Swiper>
 				</div>
 
 			</div>
@@ -69,6 +134,26 @@ const { Content } = await render(entry);
 </BaseLayout>
 
 <style>
+	.buttons {
+		background-color: #73efff6e;
+		display: grid;
+		margin: 25px;
+		margin-top: 30px;
+	}
+	.swiper {
+		max-width: 600px;
+		aspect-ratio: 16/9;
+	}
+
+	img {
+		width: 600px;
+		height: 100%;
+	}
+
+	iframe {
+		width: 600px;
+		height: 100%;
+	}
 
 	.window-container {
 		background-color: azure;
@@ -83,10 +168,9 @@ const { Content } = await render(entry);
 
 	.text-section {
 		flex: 1;
-		padding: 40px 30px;
+		padding: 60px 30px;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 	}
 
 	.text-section h2 {
@@ -96,11 +180,14 @@ const { Content } = await render(entry);
 		font-weight: bold;
 	}
 
+	.text-section h4 {
+		margin-bottom: 20px;
+	}
+
 	.text-section p {
 		color: #666;
-		line-height: 1.8;
 		font-size: 16px;
-		margin-bottom: 15px;
+		margin-bottom: 5px;
 	}
 
 	.highlight-text {
@@ -112,7 +199,7 @@ const { Content } = await render(entry);
 
 	.image-section {
 		flex: 1;
-		padding: 20px;
+		padding: 8%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -124,22 +211,25 @@ const { Content } = await render(entry);
 		transition: transform 0.3s ease;
 	}
 
-	.rounded-image:hover {
-		transform: scale(1.05);
-	}
-
 	.cta-button {
-		background: linear-gradient(135deg, #667eea, #764ba2);
+		background: linear-gradient(135deg, #66b5ea, #4ba28f);
 		color: white;
 		border: none;
 		padding: 12px 25px;
-		border-radius: 25px;
+		border-radius: 20px;
 		font-size: 16px;
+		font-weight: bold;
 		cursor: pointer;
-		margin-top: 20px;
 		transition: all 0.3s ease;
-		align-self: flex-start;
+		margin: 10px 20px;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
 	}
+
+
 
 	.cta-button:hover {
 		transform: translateY(-2px);
@@ -169,7 +259,6 @@ const { Content } = await render(entry);
 	.back-link {
 		display: none;
 	}
-
 	.details {
 		display: flex;
 		flex-direction: column;

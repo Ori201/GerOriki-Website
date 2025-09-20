@@ -2,10 +2,10 @@
 import { getCollection } from 'astro:content';
 import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
-import PortfolioPreview from '../components/PortfolioPreview.astro';
+import TranslationsPreview from '../components/TranslationsPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const projects = (await getCollection('work')).sort(
+const projects = (await getCollection('translations')).sort(
 	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
 ---
@@ -25,7 +25,7 @@ const projects = (await getCollection('work')).sort(
 				{
 					projects.map((project) => (
 						<li>
-							<PortfolioPreview project={project} />
+							<TranslationsPreview project={project} />
 						</li>
 					))
 				}

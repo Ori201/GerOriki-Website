@@ -9,9 +9,16 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@coreui/icons": "^3.0.1",
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.3",
     "astro-cloudinary": "^1.3.4",
+    "astro-splide": "^2.0.1",
+    "astro-swiper": "^1.1.0",
     "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "sass": "1.90.0",
+    "typescript": "5.9.2"
   }
 }

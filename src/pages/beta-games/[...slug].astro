@@ -43,7 +43,13 @@ const { Content } = await render(entry);
 			<div class="window-container">
 
 				<div class="image-section">
-				{entry.data.img && <img src={entry.data.info_img ?? entry.data.img} alt={entry.data.img_alt || ''} class="rounded-image w-96">}
+
+				{entry.data.img &&
+					<a target="_blank" href={entry.data.game_link}>
+						<img src={entry.data.info_img ?? entry.data.img} alt={entry.data.img_alt || ''} class="rounded-image w-96">
+					</a>
+				}
+
 				</div>
 
 				<div class="flex justify-center mt-4">

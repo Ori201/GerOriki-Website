@@ -33,6 +33,10 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games/');
 			document.documentElement.classList[isBetaPage ? 'add' : 'remove']('theme-beta');
 		</script>
 
+		{!isBetaPage && (
+			<img src="/assets/Hello_GerOriki.png" draggable="false" class="side-image">
+		)}
+
 		<script>
 			// Add “loaded” class once the document has completely loaded.
 			addEventListener('load', () => document.documentElement.classList.add('loaded'));
@@ -50,6 +54,20 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games/');
 				--bg-scale: 1.68;
 				--bg-aspect-ratio: calc(var(--bg-image-aspect-ratio) / var(--bg-scale));
 				--bg-gradient-size: calc(var(--bg-scale) * 100%);
+			}
+
+			.side-image {
+				position: fixed;
+				top: 50%;
+				left: 0;
+				rotate: 60deg;
+				transform: translateY(-50%);
+				transform: translateX(-60%);
+				width: 80px;
+				height: auto;
+				z-index: 1000;
+				user-select: none;
+				-webkit-user-drag: none;
 			}
 
 			/* These backgrounds are displayed below the fold, so we lazy load them
