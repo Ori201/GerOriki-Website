@@ -57,18 +57,17 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games/');
 			}
 
 			.side-image {
-				position: fixed;
-				top: 50%;
-				left: 0;
-				rotate: 60deg;
-				transform: translateY(-50%);
-				transform: translateX(-60%);
-				width: 80px;
-				height: auto;
-				z-index: 1000;
-				user-select: none;
-				-webkit-user-drag: none;
+			position: fixed;
+			top: 50%;
+			left: 0;
+			transform: translate(-50%, -50%) rotate(60deg);
+			width: 80px;
+			height: auto;
+			z-index: 1000;
+			user-select: none;
+			-webkit-user-drag: none;
 			}
+
 
 			/* These backgrounds are displayed below the fold, so we lazy load them
 			   once the `.loaded` class has been set.  */
