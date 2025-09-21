@@ -51,4 +51,6 @@ tags:
 
 הרץ את הפקודה:
 
-```function main:hebrew/```
+```function paint:hebrew/```
+
+> לא ממולץ להריץ בזמן משחק
