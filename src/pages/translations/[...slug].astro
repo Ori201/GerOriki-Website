@@ -10,6 +10,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 import { Swiper, SwiperWrapper, SwiperSlide, SwiperButtonPrev, SwiperButtonNext } from "astro-swiper";
 import type { AstroSwiperType } from "astro-swiper";
+import { date } from 'astro:schema';
 
 const astroSwiperOptions: AstroSwiperType = {
   options: {
@@ -40,7 +41,7 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<BaseLayout title={entry.data.title} description={entry.data.description}>
+<BaseLayout title={`תרגום ל${entry.data.type} - ${entry.data.title}`} description={entry.data.description}>
 	<div class="stack gap-2" dir="rtl">
 		<header>
 			<div class="wrapper stack gap-2">
@@ -60,7 +61,22 @@ const { Content } = await render(entry);
 			<div class="window-container">
 
 				<div class="text-section">
-					<h4>יוצר ה{entry.data.type}</h4>
+					<h4>מידע על ה{entry.data.type}</h4>
+
+					{entry.data.title &&
+						<p><b>שם המפה: </b>{entry.data.title}</p>
+					}
+					{ entry.data.creatorName &&
+						<p><b>יוצר המפה: </b>{entry.data.creatorName}</p>
+					}
+					{ entry.data.version &&
+						<p><b>גרסת מיינקראפט: </b>{entry.data.version}</p>
+					}
+					{ entry.data.PlayerAmount &&
+						<p><b>כמות שחקנים: </b>{entry.data.PlayerAmount}</p>
+					}
+
+					<h4 style="margin-top: 20px;">יוצר ה{entry.data.type}</h4>
 
 					{[
 					{ icon: "youtube-logo", url: entry.data.youtube },
@@ -75,7 +91,10 @@ const { Content } = await render(entry);
 						</p>
 					))}
 
-					<Content />
+					<div class="content">
+						<Content />
+					</div>
+
 
 					<div class="rounded-image buttons">
 						{entry.data.downloadFile &&
@@ -94,24 +113,26 @@ const { Content } = await render(entry);
 				<div class="image-section">
 					<Swiper options={astroSwiperOptions.options} class="rounded-image not-content">
 						<SwiperWrapper>
-							{entry.data.youtube_video &&
-								<SwiperSlide>
-									<iframe
-									width="850"
-									height="478"
-									src={entry.data.youtube_video}
-									allow="
-										accelerometer;
-										autoplay;
-										clipboard-write;
-										encrypted-media;
-										gyroscope;
-										picture-in-picture;
-										web-share"
-									referrerpolicy="strict-origin-when-cross-origin"
-									allowfullscreen
-									></iframe>
-								</SwiperSlide>
+							{Array.isArray(entry.data.youtube_video) &&
+								entry.data.youtube_video.map((src, index) => (
+									<SwiperSlide key={index}>
+										<iframe
+										width="850"
+										height="478"
+										src={src}
+										allow="
+											accelerometer;
+											autoplay;
+											clipboard-write;
+											encrypted-media;
+											gyroscope;
+											picture-in-picture;
+											web-share"
+										referrerpolicy="strict-origin-when-cross-origin"
+										allowfullscreen
+										></iframe>
+									</SwiperSlide>
+								))
 							}
 							{Array.isArray(entry.data.img) &&
 							entry.data.img.map((src, index) => (
@@ -120,7 +141,6 @@ const { Content } = await render(entry);
 								</SwiperSlide>
 							))
 							}
-
 						</SwiperWrapper>
 
 						<SwiperButtonPrev />
@@ -285,22 +305,14 @@ const { Content } = await render(entry);
 		max-width: 54ch;
 	}
 
-	.content {
-		max-width: 65ch;
-		margin-inline: auto;
-	}
-
-	.content > :global(* + *) {
-		margin-top: 1rem;
-	}
-
 	.content :global(h1),
 	.content :global(h2),
 	.content :global(h3),
 	.content :global(h4),
 	.content :global(h5) {
-		margin: 1.5rem 0;
+		margin: 20px 0;
 	}
+
 
 	.content :global(img) {
 		border-radius: 1.5rem;

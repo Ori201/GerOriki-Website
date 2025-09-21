@@ -14,7 +14,8 @@ youtube: https://www.youtube.com/@EightSidedSquare
 ko_fi: https://ko-fi.com/eightsidedsquare/
 websiteX: https://x.com/SidedSquare
 
-youtube_video: https://www.youtube.com/embed/BIkMkv-UuiI
+youtube_video:
+  - https://www.youtube.com/embed/BIkMkv-UuiI
 
 img:
   - /assets/translations/wyr.png
@@ -22,7 +23,7 @@ tags:
   - מוד למיינקראפט
   - תרגום לשפה העברית
 ---
-<h4 style="margin: 20px 0;">אופן ההתקנה</h4>
+#### אופן ההתקנה
 
 ● הורדת [Fabric 1.20.2](https://fabricmc.net/)
 
@@ -32,7 +33,7 @@ tags:
 
 ● העברת המוד לתיקייה minecraft\mods.
 
-<h5 style="margin: 20px 0;">הורדת התרגום</h5>
+##### הורדת התרגום
 
 ● הורד את חבילת המשאבים
 
