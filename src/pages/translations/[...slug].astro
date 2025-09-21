@@ -25,7 +25,6 @@ interface Props {
 	entry: CollectionEntry<'translations'>;
 }
 
-// TODO הקובץ שיהיה צריך להוריד יהיה קובץ zip עם סיסמה שבתוכו יהיה DataPack וכך אני אמנע את בעיית זכויות היוצרים. אני אבקש להוריד את המפה בנפרד
 // This is a dynamic route that generates a page for every Markdown file in src/content/
 // Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
 // https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
@@ -45,7 +44,6 @@ const { Content } = await render(entry);
 	<div class="stack gap-2" dir="rtl">
 		<header>
 			<div class="wrapper stack gap-2">
-
 				<a class="back-link" href="/translations/">חזרה</a>
 				<Hero title={(entry.data.title_heb ? entry.data.title_heb : entry.data.title) + " - תרגום לעברית"} align="start">
 					<div class="details">
@@ -55,7 +53,6 @@ const { Content } = await render(entry);
 						<p class="description">{entry.data.description ?? ""}</p>
 					</div>
 				</Hero>
-
 			</div>
 		</header>
 
@@ -96,9 +93,7 @@ const { Content } = await render(entry);
 
 				<div class="image-section">
 					<Swiper options={astroSwiperOptions.options} class="rounded-image not-content">
-						<!-- Additional required wrapper -->
 						<SwiperWrapper>
-							<!-- Slides -->
 							{entry.data.youtube_video &&
 								<SwiperSlide>
 									<iframe
@@ -125,12 +120,10 @@ const { Content } = await render(entry);
 							}
 						</SwiperWrapper>
 
-						<!-- navigation buttons -->
 						<SwiperButtonPrev />
 						<SwiperButtonNext />
 					</Swiper>
 				</div>
-
 			</div>
 		</main>
 	</div>
