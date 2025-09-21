@@ -4,7 +4,7 @@ title_heb: מה אתה מעדיף
 publishDate: 2025-07-28 00:00:00
 type: "מוד"
 
-version: "1.20.2"
+version: "Fabric 1.20.2"
 creatorName: "EightSidedSquare"
 
 downloadFile: "https://modrinth.com/mod/wyr/version/1.0.0"
