@@ -1,5 +1,5 @@
 ---
-title: תרגום למוד - Would you Rather
+title: Would you Rather
 title_heb: מה אתה מעדיף
 publishDate: 2025-07-28 00:00:00
 type: "מוד"
