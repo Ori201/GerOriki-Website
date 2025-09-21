@@ -1,7 +1,7 @@
 ---
 title: Painter
 title_heb: צייר
-publishDate: 2025-07-28 00:00:00
+publishDate: 2025-04-10 00:00:00
 type: "מפה"
 
 PlayerAmount: 1-2
