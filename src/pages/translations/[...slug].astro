@@ -113,11 +113,14 @@ const { Content } = await render(entry);
 									></iframe>
 								</SwiperSlide>
 							}
-							{entry.data.img &&
-								<SwiperSlide>
-									<img src={entry.data.img} alt={entry.data.img_alt || ''}>
+							{Array.isArray(entry.data.img) &&
+							entry.data.img.map((src, index) => (
+								<SwiperSlide key={index}>
+								<img src={src} alt={`תמונה ${index + 1}`} />
 								</SwiperSlide>
+							))
 							}
+
 						</SwiperWrapper>
 
 						<SwiperButtonPrev />

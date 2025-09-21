@@ -9,8 +9,8 @@ const { data, id } = Astro.props.project;
 ---
 
 <a class="card" href={`/translations/${id}`}>
-	<span class="title">{data.title}</span>
-	<img src={data.img} alt={data.img_alt || ''} loading="lazy" decoding="async" />
+	<span class="title">תרגום ל{data.type} - {data.title}</span>
+	<img src={data.img[0]} alt={data.img_alt || ''} loading="lazy" decoding="async" />
 </a>
 
 <style>

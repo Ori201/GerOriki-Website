@@ -1,7 +1,7 @@
 ---
 title: תרגום למוד - Would you Rather
 title_heb: מה אתה מעדיף
-publishDate: 2019-12-01 00:00:00
+publishDate: 2025-07-28 00:00:00
 type: "מוד"
 
 version: "1.20.2"
@@ -16,7 +16,8 @@ websiteX: https://x.com/SidedSquare
 
 youtube_video: https://www.youtube.com/embed/BIkMkv-UuiI
 
-img: /assets/translations/wyr.png
+img:
+  - /assets/translations/wyr.png
 tags:
   - מוד למיינקראפט
   - תרגום לשפה העברית

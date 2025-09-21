@@ -1,0 +1,45 @@
+---
+title: Final Hour
+title_heb: השעה האחרונה
+publishDate: 2025-4-06 00:00:00
+type: "מפה"
+
+version: "1.18.2"
+creatorName: "Double-T"
+
+downloadFile: "https://www.planetminecraft.com/project/final-hour-late-delivery-dlc/"
+translatePack: "/files/wyr-hebrew.zip"
+
+youtube: https://www.youtube.com/channel/UCT0WDYDQf49jq4ukYeTSVkA
+websiteX: https://www.twitter.com/2T_Prod
+
+youtube_video: https://www.youtube.com/embed/2P4LtUZ93zo
+
+img:
+  - https://static.planetminecraft.com/files/image/minecraft/project/2022/754/16053078-mmthumbnailfinalhour_l.webp
+  - https://static.planetminecraft.com/files/image/minecraft/project/2022/754/16052714_l.webp
+  - https://static.planetminecraft.com/files/image/minecraft/project/2022/754/16052717_l.webp
+  - https://static.planetminecraft.com/files/image/minecraft/project/2022/754/16052721_l.webp
+tags:
+  - מפת מיינקראפט
+  - תרגום לשפה העברית
+---
+<h4 style="margin: 20px 0;">אופן ההתקנה</h4>
+
+● הורדת [Fabric 1.20.2](https://fabricmc.net/)
+
+● הורדת המוד [Cardinal Components API](https://modrinth.com/mod/cardinal-components-api/version/5.3.0) ו- [Fabric API](https://modrinth.com/mod/fabric-api/version/0.91.6+1.20.2)
+
+● הורדת המוד
+
+● העברת המוד לתיקייה minecraft\mods.
+
+<h5 style="margin: 20px 0;">הורדת התרגום</h5>
+
+● הורד את חבילת המשאבים
+
+● העבר לתיקייה minecraft\resourcepacks.
+
+● בהגדרות המשחק, בחר את חבילת המשאבים הרצויה
+
+*לא כל המפה מתורגמת!*
