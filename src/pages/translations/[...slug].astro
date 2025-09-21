@@ -64,10 +64,10 @@ const { Content } = await render(entry);
 					<h4>מידע על ה{entry.data.type}</h4>
 
 					{entry.data.title &&
-						<p><b>שם המפה: </b>{entry.data.title}</p>
+						<p><b>שם ה{entry.data.type}: </b>{entry.data.title}</p>
 					}
 					{ entry.data.creatorName &&
-						<p><b>יוצר המפה: </b>{entry.data.creatorName}</p>
+						<p><b>יוצר ה{entry.data.type}: </b>{entry.data.creatorName}</p>
 					}
 					{ entry.data.version &&
 						<p><b>גרסת מיינקראפט: </b>{entry.data.version}</p>
