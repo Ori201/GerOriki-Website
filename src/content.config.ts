@@ -25,6 +25,7 @@ export const collections = {
 			translatePack: z.string().optional(),
 			downloadFile: z.string().optional(),
 			translateMap: z.string().optional(),
+			translateDataPack: z.string().optional(),
 			PlayerAmount: z.string().optional(),
 		}),
 	}),

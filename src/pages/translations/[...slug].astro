@@ -97,9 +97,19 @@ const { Content } = await render(entry);
 
 
 					<div class="rounded-image buttons">
+						{entry.data.translateMap &&
+							<a href={entry.data.translateMap} target="_blank" download class="cta-button">
+								הורדת המפה המתורגמת
+							</a>
+						}
 						{entry.data.downloadFile &&
 							<a href={entry.data.downloadFile} target="_blank" download class="cta-button">
 								הורדת ה{entry.data.type}
+							</a>
+						}
+						{ entry.data.translateDataPack &&
+							<a href={entry.data.translateDataPack} target="_blank" download class="cta-button">
+								הורדת חבילת הנתונים
 							</a>
 						}
 						{entry.data.translatePack &&
