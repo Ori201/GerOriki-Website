@@ -159,7 +159,6 @@ const { Content } = await render(entry);
 		border-radius: 20px;
 		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 		overflow: hidden;
-		max-width: 1200px;
 		display: flex;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 		margin-inline:auto;
@@ -200,8 +199,7 @@ const { Content } = await render(entry);
 	.image-section {
 		flex: 1;
 		padding-left: 8%;
-		padding-right: 8%;
-		padding-bottom: 8%;
+		padding-right: 4%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -229,6 +227,7 @@ const { Content } = await render(entry);
 		align-items: center;
 		justify-content: center;
 		text-align: center;
+		min-width: 20ch;
 	}
 
 
@@ -238,11 +237,19 @@ const { Content } = await render(entry);
 		box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 1070px) {
 		.window-container {
 			flex-direction: column;
 			margin: 10px;
 		}
+
+		.text-section {
+        	order: 2;
+    	}
+    	.image-section {
+			margin-top: 5rem;
+       		order: 1;
+    	}
 
 		.text-section, .image-section {
 			flex: none;
