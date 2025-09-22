@@ -21,7 +21,7 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games/');
 	<head>
 		<MainHead title={title} description={description} />
 	</head>
-	<body>
+	<body oncontextmenu="return false">
 		<div class="stack backgrounds">
 			<Nav />
 			<slot />
