@@ -24,15 +24,20 @@ const isCurrentPage = (href: string) => {
 	return pathname === href || (href !== '/' && pathname.startsWith(href));
 };
 
-const isBetaPage = Astro.url.pathname.startsWith('/beta-games/');
+const isBetaPage = Astro.url.pathname.startsWith('/beta-games');
 ---
 
 <nav>
 	<div class="menu-header">
 
 		{isBetaPage
-			?	<a href="/" class="site-title">
-					Beta Games
+			?	<a href="/beta-games/" class="site-title">
+					<img draggable="false" style="
+						user-select: none;
+						-webkit-user-drag: none;
+						filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.2));
+						align-self: center;
+						" width="130" height="130" src="/assets/BetaGamesLogo.png">
 				</a>
 			:
 				<a href="/" class="site-title">

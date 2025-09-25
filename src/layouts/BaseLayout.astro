@@ -14,7 +14,7 @@ interface Props {
 
 const { title, description } = Astro.props;
 
-const isBetaPage = Astro.url.pathname.startsWith('/beta-games/');
+const isBetaPage = Astro.url.pathname.startsWith('/beta-games');
 ---
 
 <html lang="he" data-is-beta={isBetaPage}>

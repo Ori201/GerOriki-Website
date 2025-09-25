@@ -16,12 +16,14 @@ const projects = (await getCollection('betaGames')).sort(
 >
 	<div class="stack gap-20" dir="rtl">
 		<main class="wrapper stack gap-8">
-			<Hero
-				title="Beta Games"
-				tagline="כאן ניתן לראות את כל משחקי Beta Games לרובלוקס!"
-				align="start"
-			/>
-			<Grid variant="offset">
+			<header class="hero">
+				<Hero
+					logo="/assets/BetaGamesLogo.png"
+					tagline="כאן ניתן לראות את כל משחקי Beta Games לרובלוקס!"
+					align="center"
+				/>
+			</header>
+			<Grid variant="small">
 				{
 					projects.map((project) => (
 						<li>
@@ -33,3 +35,14 @@ const projects = (await getCollection('betaGames')).sort(
 		</main>
 	</div>
 </BaseLayout>
+
+<style>
+	.hero {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 2rem;
+		margin-bottom: 2%;
+	}
+
+</style>
