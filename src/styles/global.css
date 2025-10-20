@@ -27,6 +27,9 @@
 
 	--link-color: var(--accent-regular);
 
+	--nav-items-back: #adfcf8;
+	--nav-items-border: #6fcecb;
+
 	/* Gradients */
 	--gradient-stop-1: var(--accent-light);
 	--gradient-stop-2: var(--accent-regular);
@@ -103,6 +106,9 @@
 
 	--link-color: var(--accent-dark);
 
+	--nav-items-back: #d6d1d1;
+	--nav-items-border: #aaa9a9;
+
 	--gradient-stop-1: #11abc6;
 	--gradient-subtle: linear-gradient(150deg, var(--gray-900) 19%, var(--gray-999) 81%);
 	--gradient-accent-orange: linear-gradient(
@@ -111,7 +117,7 @@
 		var(--accent-regular),
 		var(--accent-light)
 	);
-	--gradient-stroke: linear-gradient(180deg, var(--gray-600), var(--gray-800));
+	--gradient-stroke: linear-gradient(150deg, var(--gray-200), var(--gray-200));
 
 	--shadow-sm:
 		0px 6px 3px rgba(255, 255, 255, 0.01), 0px 4px 2px rgba(255, 255, 255, 0.01),

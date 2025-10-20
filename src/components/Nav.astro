@@ -98,6 +98,7 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games');
 </nav>
 
 <script>
+import { WatchDirectoryFlags } from "typescript";
 	class MenuButton extends HTMLElement {
 		constructor() {
 			super();
@@ -113,6 +114,7 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games');
 			menu.classList.add('menu-content');
 
 			/** Set whether the menu is currently expanded or collapsed. */
+
 			const setExpanded = (expand: boolean) => {
 				btn.setAttribute('aria-expanded', expand ? 'true' : 'false');
 				menu.hidden = !expand;
@@ -169,13 +171,12 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games');
 		color: var(--gray-300);
 		background: radial-gradient(var(--gray-900), var(--gray-800) 150%);
 		box-shadow: var(--shadow-md);
+		transition: all 0.3s ease-in-out;
 	}
 
 	.menu-button[aria-expanded='true'] {
-		color: var(--gray-0);
-		background:
-			linear-gradient(180deg, var(--gray-600), transparent),
-			radial-gradient(var(--gray-900), var(--gray-800) 150%);
+		color: var(--gray-100);
+		transform: scale(0.95);
 	}
 
 	.menu-button[hidden] {
@@ -198,16 +199,22 @@ const isBetaPage = Astro.url.pathname.startsWith('/beta-games');
 	}
 
 	.nav-items {
-		margin: 0;
+		margin: 0 2%;
+		// margin-right: 100px;
+		// margin-left: 100px;
 		display: flex;
 		flex-direction: column;
 		gap: 1rem;
+		direction: rtl;
 		font-size: var(--text-md);
 		line-height: 1.2;
 		list-style: none;
-		padding: 2rem;
-		background-color: var(--gray-999);
-		border-bottom: 1px solid var(--gray-800);
+		padding: 1.3rem;
+		background-color: var(--nav-items-back);
+		//border-bottom: 5px solid var(--nav-items-border);
+		//border-top: 5px solid var(--nav-items-border);
+		border: 5px solid var(--nav-items-border);
+		border-radius: 20px;
 	}
 
 	.link {
