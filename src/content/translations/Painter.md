@@ -3,6 +3,7 @@ title: Painter
 title_heb: צייר
 publishDate: 2025-04-10 00:00:00
 type: "מפה"
+#description: תיאור
 
 PlayerAmount: 1-2
 version: "1.21.3"

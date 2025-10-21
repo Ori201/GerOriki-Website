@@ -31,7 +31,7 @@ export const collections = {
 	}),
 
 	betaGames: defineCollection({
-		// Load Markdown files in the src/content/translations directory.
+		// Load Markdown files in the src/content/betaGames directory.
 		loader: glob({ base: './src/content/betaGames', pattern: '**/*.md' }),
 		schema: z.object({
 			title: z.string(),

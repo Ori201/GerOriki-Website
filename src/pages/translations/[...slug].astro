@@ -75,7 +75,11 @@ const { Content } = await render(entry);
 					{ entry.data.PlayerAmount &&
 						<p><b>כמות שחקנים: </b>{entry.data.PlayerAmount}</p>
 					}
-
+					{entry.data.description &&
+						<h4 style="margin-top: 20px;">תיאור ה{entry.data.type}</h4>
+						<p>{entry.data.description}</p>
+					}
+					
 					<h4 style="margin-top: 20px;">יוצר ה{entry.data.type}</h4>
 
 					{[

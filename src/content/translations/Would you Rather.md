@@ -3,6 +3,7 @@ title: Would you Rather
 title_heb: מה אתה מעדיף
 publishDate: 2025-07-28 00:00:00
 type: "מוד"
+#description: תיאור
 
 version: "Fabric 1.20.2"
 creatorName: "EightSidedSquare"
