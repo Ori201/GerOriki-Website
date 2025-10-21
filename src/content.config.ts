@@ -22,6 +22,7 @@ export const collections = {
 			youtube_video: z.array(z.string()).optional(),
 			ko_fi: z.string().optional(),
 			youtube: z.string().optional(),
+			website: z.string().optional(),
 			translatePack: z.string().optional(),
 			downloadFile: z.string().optional(),
 			translateMap: z.string().optional(),

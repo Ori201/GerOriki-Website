@@ -14,6 +14,7 @@ translatePack: "/files/wyr-hebrew.zip"
 youtube: https://www.youtube.com/@EightSidedSquare
 ko_fi: https://ko-fi.com/eightsidedsquare/
 websiteX: https://x.com/SidedSquare
+website: https://eightsidedsquare.com/
 
 youtube_video:
   - https://www.youtube.com/embed/BIkMkv-UuiI
