@@ -21,7 +21,7 @@ youtube_video:
 img:
   - /assets/translations/painter.png
 tags:
-  - מוד למיינקראפט
+  - מפה למיינקראפט
   - תרגום לשפה העברית
 ---
 #### אופן ההתקנה
