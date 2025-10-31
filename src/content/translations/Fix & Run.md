@@ -15,6 +15,7 @@ website: https://www.planetminecraft.com/member/gasihup/
 
 img:
   - https://static.planetminecraft.com/files/image/minecraft/project/2025/218/19102917-png_l.webp
+  - /assets/translations/fix&run.jpg
 tags:
   - מפה למיינקראפט
   - תרגום לשפה העברית
