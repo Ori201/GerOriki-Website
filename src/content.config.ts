@@ -28,6 +28,7 @@ export const collections = {
 			translateMap: z.string().optional(),
 			translateDataPack: z.string().optional(),
 			PlayerAmount: z.string().optional(),
+			weblateTranslateName: z.string().optional(),
 		}),
 	}),
 

@@ -12,6 +12,7 @@ creatorName: "gasihup"
 #translatePack: "/files/wyr-hebrew.zip"
 
 website: https://www.planetminecraft.com/member/gasihup/
+weblateTranslateName: "fix-and-run"
 
 img:
   - https://static.planetminecraft.com/files/image/minecraft/project/2025/218/19102917-png_l.webp

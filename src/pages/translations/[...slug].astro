@@ -99,6 +99,16 @@ const { Content } = await render(entry);
 						<Content />
 					</div>
 
+					{entry.data.weblateTranslateName && (
+						<>
+							<h4 style={{ marginTop: '20px' }}>עזרה בתרגום</h4>
+							<a href={`http://weblate.geroriki.dpdns.org/engage/${entry.data.weblateTranslateName}`} target="_blank">
+							<img
+								src={`http://weblate.geroriki.dpdns.org/widget/${entry.data.weblateTranslateName}/-/he_IL/multi-auto.svg`}
+								alt="מצב תרגום"
+							/>
+						</>
+					)}
 
 					<div class="rounded-image buttons">
 						{entry.data.translateMap &&
