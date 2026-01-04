@@ -23,7 +23,7 @@ youtube_video:
 
 img:
   #- /assets/translations/invasion.png
-  - /assets/translations/mojang.png
+  - /assets/translations/ghostRemont.png
   # - https://minecraft-inside.ru/uploads/files/2025-08/thumb/4_13.png
   # - https://minecraft-inside.ru/uploads/files/2025-08/thumb/2_18.png
   # - https://minecraft-inside.ru/uploads/files/2025-08/thumb/1_16.png
