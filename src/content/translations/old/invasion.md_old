@@ -1,0 +1,29 @@
+---
+title: Invasion
+publishDate: 2025-15-11 00:00:00
+type: "מפה"
+description: "מפת בריחה מרובה משתתפים מרוצח. כשאתם משחקים בתור שורדים, תצטרכו לפתוח תיבות באמצעות מפתח, למצוא 4 חפצים כדי לתקן את הגנרטורים, ולאחר מכן להפעיל את המפסקים באחוזה כדי לפתוח את השערים. כשאתם משחקים בתור הרוצח, עליכם להשתמש בכל האמצעים האפשריים כדי לתפוס את השורדים ולמנוע מהם להימלט."
+
+PlayerAmount: 2+
+version: "1.21.6"
+creatorName: "DarkLoopStudios"
+
+#downloadFile: "https://modrinth.com/mod/wyr/version/1.0.0"
+#translatePack: "/files/wyr-hebrew.zip"
+
+youtube: https://www.youtube.com/@dlsmapmaking
+weblateTranslateName: "invasion/-"
+
+img:
+  #- /assets/translations/invasion.png
+  - https://minecraft-inside.ru/uploads/files/2025-08/68af494dc0311.png
+   - https://minecraft-inside.ru/uploads/files/2025-08/thumb/5_10.png
+  # - https://minecraft-inside.ru/uploads/files/2025-08/thumb/4_13.png
+  # - https://minecraft-inside.ru/uploads/files/2025-08/thumb/2_18.png
+  # - https://minecraft-inside.ru/uploads/files/2025-08/thumb/1_16.png
+  # - https://minecraft-inside.ru/uploads/files/2025-08/thumb/3_16.png
+
+tags:
+  - מפה למיינקראפט
+  - תרגום לשפה העברית
+---

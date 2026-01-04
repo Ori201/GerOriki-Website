@@ -23,6 +23,8 @@ export const collections = {
 			ko_fi: z.string().optional(),
 			youtube: z.string().optional(),
 			website: z.string().optional(),
+			telegram: z.string().optional(),
+			discord: z.string().optional(),
 			translatePack: z.string().optional(),
 			downloadFile: z.string().optional(),
 			translateMap: z.string().optional(),

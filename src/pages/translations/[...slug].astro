@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import "tailwindcss";
 
-
+import Comments from '../../components/Comments.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
@@ -39,6 +39,15 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+let weblateLink = ""
+let weblateWiget = ""
+if (entry.data.weblateTranslateName) {
+	const slashIndex = entry.data.weblateTranslateName.indexOf('/');
+	weblateLink = slashIndex !== -1 ? entry.data.weblateTranslateName.substring(0, slashIndex) : entry.data.weblateTranslateName;
+	weblateWiget = slashIndex !== -1 ? entry.data.weblateTranslateName : entry.data.weblateTranslateName + "/-"
+}
+
 ---
 
 <BaseLayout title={`תרגום ל${entry.data.type} - ${entry.data.title}`} description={entry.data.description}>
@@ -60,6 +69,7 @@ const { Content } = await render(entry);
 			<div class="window-container">
 
 				<div class="text-section">
+					<p>אני לא קשור לפרויקט {entry.data.title}.</p>
 					<h4>מידע על ה{entry.data.type}</h4>
 
 					{entry.data.title &&
@@ -85,7 +95,9 @@ const { Content } = await render(entry);
 					{ icon: "website", url: entry.data.website },
 					{ icon: "youtube-logo", url: entry.data.youtube },
 					{ icon: "x-logo", url: entry.data.websiteX },
-					{ icon: "ko-fi-logo", url: entry.data.ko_fi }
+					{ icon: "ko-fi-logo", url: entry.data.ko_fi },
+					{ icon: "telegram-logo", url: entry.data.telegram },
+					{ icon: "discord-logo", url: entry.data.discord },
 					].filter(link => link.url).map(({icon, url}) => (
 						<p class="inline">
 						<Icon icon={icon} size="1.2em"/>
@@ -102,9 +114,9 @@ const { Content } = await render(entry);
 					{entry.data.weblateTranslateName && (
 						<>
 							<h4 style={{ marginTop: '20px' }}>עזרה בתרגום</h4>
-							<a href={`http://weblate.geroriki.dpdns.org/engage/${entry.data.weblateTranslateName}`} target="_blank">
+							<a href={`http://weblate.geroriki.dpdns.org/engage/${weblateLink}`} target="_blank">
 							<img
-								src={`http://weblate.geroriki.dpdns.org/widget/${entry.data.weblateTranslateName}/-/he_IL/multi-auto.svg`}
+								src={`http://weblate.geroriki.dpdns.org/widget/${weblateWiget}/he_IL/multi-auto.svg`}
 								alt="מצב תרגום"
 							/>
 						</>
@@ -172,6 +184,7 @@ const { Content } = await render(entry);
 					</Swiper>
 				</div>
 			</div>
+			<Comments />
 		</main>
 	</div>
 </BaseLayout>
@@ -186,13 +199,14 @@ const { Content } = await render(entry);
 		min-width: 20ch;
 	}
 	.swiper {
-		max-width: 600px;
+		width: 600px;
 		aspect-ratio: 16/9;
 	}
 
 	img, iframe {
 		max-width: 100%;
 		height: 100%;
+		object-fit: cover;
 	}
 
 	.window-container {
