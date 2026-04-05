@@ -13,7 +13,9 @@ translatePack: "/files/wyr-hebrew.zip"
 youtube: https://www.youtube.com/channel/UCT0WDYDQf49jq4ukYeTSVkA
 websiteX: https://www.twitter.com/2T_Prod
 
-youtube_video: https://www.youtube.com/embed/2P4LtUZ93zo
+youtube_video:
+  - https://www.youtube.com/embed/2P4LtUZ93zo
+  - https://www.youtube.com/embed/iZt3FyusGlE
 
 img:
   - https://static.planetminecraft.com/files/image/minecraft/project/2022/754/16053078-mmthumbnailfinalhour_l.webp

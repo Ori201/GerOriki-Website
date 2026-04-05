@@ -7,6 +7,7 @@ import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import WeblateFeed from '../../components/WeblateFeed.astro';
 
 import { Swiper, SwiperWrapper, SwiperSlide, SwiperButtonPrev, SwiperButtonNext } from "astro-swiper";
 import type { AstroSwiperType } from "astro-swiper";
@@ -57,6 +58,7 @@ if (entry.data.weblateTranslateName) {
 				<a class="back-link" href="/translations/">חזרה</a>
 				<Hero title={(entry.data.title_heb ? entry.data.title_heb : entry.data.title) + " - תרגום לעברית"} align="start">
 					<div class="details">
+						{ entry.data.map_version }
 						<div class="tags">
 							{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
 						</div>
@@ -113,6 +115,7 @@ if (entry.data.weblateTranslateName) {
 
 					{entry.data.weblateTranslateName && (
 						<>
+							<WeblateFeed href={`http://weblate.geroriki.dpdns.org/exports/rss/${entry.data.weblateTranslateName}`}/>
 							<h4 style={{ marginTop: '20px' }}>עזרה בתרגום</h4>
 							<a href={`http://weblate.geroriki.dpdns.org/engage/${weblateLink}`} target="_blank">
 							<img

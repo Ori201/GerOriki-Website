@@ -8,8 +8,10 @@ version: "1.20.5"
 websiteX: https://x.com/VerartTeam
 creatorName: "Verart"
 
-youtube_video: https://www.youtube.com/embed/4hKxa1_W-S0
-img: https://static.planetminecraft.com/files/image/minecraft/project/2024/422/17571282-youtubetumbnail_l.webp
+youtube_video:
+  - https://www.youtube.com/embed/4hKxa1_W-S0
+img:
+  - https://static.planetminecraft.com/files/image/minecraft/project/2024/422/17571282-youtubetumbnail_l.webp
 tags:
   - מפת מיינקראפט
   - תרגום לשפה העברית

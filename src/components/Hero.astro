@@ -18,7 +18,7 @@ const { align = 'center', tagline, title, logo } = Astro.props;
 		{title &&
 			<h1 class="title">{title}</h1>
 		}
-		{tagline && <p class="tagline">{tagline}</p>}
+		{tagline && <p class="tagline" set:html={tagline}></p>}
 	</div>
 	<slot />
 </div>

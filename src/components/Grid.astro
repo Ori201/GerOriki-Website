@@ -47,6 +47,10 @@ const { variant } = Astro.props;
 		}
 
 		/* If last row contains only one item, display it in the second column. */
+		.grid {
+			direction: ltr;
+		}
+
 		.grid.offset > :global(:last-child:nth-child(odd)) {
 			grid-column: 2 / 3;
 			transform: none;

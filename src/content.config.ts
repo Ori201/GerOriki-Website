@@ -1,6 +1,6 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { string } from 'astro:schema';
+import { map, string } from 'astro:schema';
 
 export const collections = {
 	translations: defineCollection({
@@ -9,6 +9,7 @@ export const collections = {
 		schema: z.object({
 			title: z.string(),
 			type: z.string(),
+			map_version: z.string().optional(),
 			title_heb: z.string().optional(),
 			description: z.string().optional(),
 			publishDate: z.coerce.date(),
