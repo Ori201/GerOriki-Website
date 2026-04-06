@@ -1,6 +1,9 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
+import { getEntry, render } from 'astro:content';
+//import { type CollectionEntry, getCollection, render } from 'astro:content';
 import "tailwindcss";
+
+export const prerender = false;
 
 import Comments from '../../components/Comments.astro';
 import Hero from '../../components/Hero.astro';
@@ -23,23 +26,35 @@ const astroSwiperOptions: AstroSwiperType = {
   },
 };
 
-interface Props {
-	entry: CollectionEntry<'translations'>;
+const { slug } = Astro.params;
+const entry = await getEntry('translations', slug as string);
+
+if (!entry) {
+    return new Response(null, {
+        status: 404,
+        statusText: 'Not found'
+    });
 }
+
+const { Content } = await render(entry);
+// interface Props {
+// 	entry: CollectionEntry<'translations'>;
+// }
 
 // This is a dynamic route that generates a page for every Markdown file in src/content/
 // Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
 // https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
-export async function getStaticPaths() {
-	const translations = await getCollection('translations');
-	return translations.map((entry) => ({
-		params: { slug: entry.id },
-		props: { entry },
-	}));
-}
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+// export async function getStaticPaths() {
+// 	const translations = await getCollection('translations');
+// 	return translations.map((entry) => ({
+// 		params: { slug: entry.id },
+// 		props: { entry },
+// 	}));
+// }
+
+// const { entry } = Astro.props;
+// const { Content } = await render(entry);
 
 let weblateLink = ""
 let weblateWiget = ""
