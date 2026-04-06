@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "vite": "^5.4.0",
     "@astrojs/vercel": "^10.0.4",
     "@coreui/icons": "^3.0.1",
     "@tailwindcss/vite": "^4.1.12",
@@ -18,6 +17,11 @@
     "astro-splide": "^2.0.1",
     "astro-swiper": "^1.1.0",
     "tailwindcss": "^4.1.12"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "6.4.2"
+    }
   },
   "devDependencies": {
     "sass": "1.90.0",
