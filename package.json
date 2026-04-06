@@ -8,9 +8,6 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-    "engines": {
-    "node": ">=20.0.0"
-  },
   "dependencies": {
     "@astrojs/vercel": "^10.0.4",
     "@coreui/icons": "^3.0.1",
