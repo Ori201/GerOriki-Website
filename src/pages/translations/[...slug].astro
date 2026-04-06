@@ -13,6 +13,8 @@ import { Swiper, SwiperWrapper, SwiperSlide, SwiperButtonPrev, SwiperButtonNext 
 import type { AstroSwiperType } from "astro-swiper";
 import { date } from 'astro:schema';
 
+export const prerender = false;
+
 const astroSwiperOptions: AstroSwiperType = {
   options: {
     loop: true,
