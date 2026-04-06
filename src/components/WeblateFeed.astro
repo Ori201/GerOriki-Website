@@ -7,7 +7,7 @@ interface Props {
 
 const {
     href = "https://weblate.geroriki.dpdns.org/exports/rss/yoodexy-mod/map/",
-    interval = 5000
+    interval = 5000000
 } = Astro.props;
 ---
 
@@ -15,10 +15,6 @@ const {
     <header class="widget-header">
         <div class="header-title">
             <h2>פעילות אחרונה ב- Weblate</h2>
-        </div>
-        <div class="live-badge">
-            <span class="pulse-dot"></span>
-            <span>מעודכן</span>
         </div>
     </header>
 
@@ -33,13 +29,26 @@ const {
 </div>
 
 <script define:vars={{ href, interval }}>
-    const PROXY_URL = 'https://corsproxy.io/?';
 
-    function extractUser(description) {
-        if (!description) return "מערכת";
-        const match = description.match(/<span>(.*?)<\/span>/);
-        return match ? match[1] : "משתמש";
+function extractUser(description) {
+    if (!description) return "מערכת";
+
+    const spanMatch = description.match(/<span>(.*?)<\/span>/);
+    if (spanMatch) return spanMatch[1].trim();
+
+    const byMatch = description.match(/(?:ע״י|על ידי)\s*(.*)$/);
+    if (byMatch && byMatch[1].trim() !== "") {
+        return byMatch[1].trim();
     }
+
+    if (description.includes("התראה") || description.includes("מערכת")) {
+        return "מערכת";
+    }
+
+    if (description.includes("ע״י")) return "מערכת";
+
+    return "משתמש";
+}
 
     function classifyAction(title) {
         if (title.includes("הצעה"))       return { icon: "✦", cls: "action-suggest" };
@@ -55,10 +64,9 @@ const {
         if (!viewer) return;
 
         try {
-            const cacheBuster = `&_t=${Date.now()}`;
-            const finalUrl = PROXY_URL + encodeURIComponent(href + (href.includes('?') ? '&' : '?') + cacheBuster);
-
+            const finalUrl = `/api/rss-proxy/?url=${encodeURIComponent(href)}`;
             const response = await fetch(finalUrl, { cache: 'no-store' });
+
             if (!response.ok) throw new Error();
 
             const str = await response.text();
@@ -162,25 +170,6 @@ const {
         background: #fafafa;
     }
     .header-title h2 { font-size: 1rem; color: var(--text-main); margin: 0; font-weight: 600; }
-
-    .live-badge {
-        display: flex; align-items: center; gap: 6px;
-        background: var(--primary-bg); padding: 4px 10px;
-        border-radius: 99px; font-size: 0.75rem; color: var(--primary); font-weight: 700;
-    }
-    .pulse-dot {
-        width: 8px; height: 8px; background-color: var(--primary);
-        border-radius: 50%; position: relative;
-    }
-    .pulse-dot::after {
-        content: ''; position: absolute; width: 100%; height: 100%; top: 0; left: 0;
-        background-color: var(--primary); border-radius: 50%;
-        animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-        0%   { transform: scale(1);   opacity: 0.8; }
-        100% { transform: scale(2.5); opacity: 0;   }
-    }
 
     .widget-content {
         max-height: 380px;
