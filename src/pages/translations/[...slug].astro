@@ -17,13 +17,13 @@ import type { AstroSwiperType } from "astro-swiper";
 import { date } from 'astro:schema';
 
 const astroSwiperOptions: AstroSwiperType = {
-  options: {
-    loop: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-  },
+	options: {
+		loop: true,
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
+		},
+	},
 };
 
 const { slug } = Astro.params;
