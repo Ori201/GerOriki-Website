@@ -1,7 +1,10 @@
 ---
+// WeblateFeed.astro
+
 import { readonly } from 'astro:schema';
 
-// WeblateFeed.astro
+export const prerender = false;
+
 interface Props {
     href?: string;
 }
