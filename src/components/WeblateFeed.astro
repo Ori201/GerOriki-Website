@@ -1,4 +1,6 @@
 ---
+import { readonly } from 'astro:schema';
+
 // WeblateFeed.astro
 interface Props {
     href?: string;
@@ -14,6 +16,7 @@ const response = await fetch(href, {
     }
 });
 const xml = await response.text();
+console.log(xml);
 
 const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map(m => {
     const block = m[1];
