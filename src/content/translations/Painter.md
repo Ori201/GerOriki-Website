@@ -16,6 +16,7 @@ creatorName: "Water_Studio"
 downloadFile: "https://drive.google.com/file/d/1bPELiwqvNwDBGP9YL-rtjsT2k6-k4qk2/view?usp=sharing"
 #translateDataPack: "/files/datapacks/paint.zip"
 #translateMap: "/files/Painter - Hebrew.zip"
+#downloadPatch: "/files/patches/Painter.xdelta"
 
 youtube: https://www.youtube.com/channel/UCcA6ZuwhsDEbKCOYQT2EfsQ
 
