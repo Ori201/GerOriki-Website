@@ -57,16 +57,17 @@ const { Content } = await render(entry);
 // const { Content } = await render(entry);
 
 let weblateLink = ""
-let weblateWiget = ""
+let weblateWidget = ""
 if (entry.data.weblateTranslateName) {
 	const slashIndex = entry.data.weblateTranslateName.indexOf('/');
 	weblateLink = slashIndex !== -1 ? entry.data.weblateTranslateName.substring(0, slashIndex) : entry.data.weblateTranslateName;
-	weblateWiget = slashIndex !== -1 ? entry.data.weblateTranslateName : entry.data.weblateTranslateName + "/-"
+	weblateWidget = slashIndex !== -1 ? entry.data.weblateTranslateName : entry.data.weblateTranslateName + "/-"
 }
 
 ---
 
 <BaseLayout title={`תרגום ל${entry.data.type} - ${entry.data.title}`} description={entry.data.description}>
+
 	<div class="stack gap-2" dir="rtl">
 		<header>
 			<div class="wrapper stack gap-2">
@@ -134,7 +135,7 @@ if (entry.data.weblateTranslateName) {
 							<h4 style={{ marginTop: '20px' }}>עזרה בתרגום</h4>
 							<a href={`http://weblate.geroriki.dpdns.org/engage/${weblateLink}`} target="_blank">
 							<img
-								src={`http://weblate.geroriki.dpdns.org/widget/${weblateWiget}/he_IL/multi-auto.svg`}
+								src={`http://weblate.geroriki.dpdns.org/widget/${weblateWidget}/he_IL/multi-auto.svg`}
 								alt="מצב תרגום"
 							/>
 						</>
@@ -159,6 +160,11 @@ if (entry.data.weblateTranslateName) {
 						{entry.data.translatePack &&
 							<a href={entry.data.translatePack} target="_blank" download class="cta-button">
 								הורדת התרגום (חבילת משאבים)
+							</a>
+						}
+						{entry.data.downloadPatch &&
+							<a href={entry.data.downloadPatch} target="_blank" download class="cta-button">
+								הורדת ה- Patch
 							</a>
 						}
 					</div>
@@ -200,8 +206,84 @@ if (entry.data.weblateTranslateName) {
 						<SwiperButtonPrev />
 						<SwiperButtonNext />
 					</Swiper>
+
 				</div>
-			</div>
+
+				{entry.data.need_patch &&
+
+					<link rel="stylesheet" href="/rom-patcher-js/style.css" />
+					<script is:inline src="/rom-patcher-js/RomPatcher.webapp.js"></script>
+
+					<script is:inline define:vars={{ entryData: entry.data }}>
+						window.addEventListener('load', function(){
+								const myPatcherSettings={
+								language: 'he',
+								requireValidation: false, /* if true, user won't be able to apply patch if the provided ROM is not valid*/
+								allowDropFiles: false /* if true, it adds basic drag and drop support */
+							};
+							RomPatcherWeb.initialize(myPatcherSettings, {
+								file: '/files/patches/'+entryData.patch,
+								name: entryData.title, //patch name that will appear in the dropdown button
+								//inputCrc32: 0xdeadbeef, //add CRC32 checksum validation to patch
+								//inputMd5: 'cafebabecafebabecafebabecafebabe', //add MD5 checksum validation to patch (must be a string!)
+								//description: 'This patch translates the game and fixes bugs!', //short description that will appear when user picks this patch
+								outputName: 'My game (Hack)' //patched ROM name
+							});
+						});
+					</script>
+
+					<div id="rom-patcher-container">
+						<div class="rom-patcher-row margin-bottom" id="rom-patcher-row-file-rom">
+							<div class="text-right"><label for="rom-patcher-input-file-rom" data-localize="yes">הקובץ המקורי של ה{(entry.data.type)}:</label></div>
+							<div class="rom-patcher-container-input">
+								<input type="file" id="rom-patcher-input-file-rom" class="empty" disabled />
+							</div>
+						</div>
+						<div class="margin-bottom text-selectable text-mono text-muted" id="rom-patcher-rom-info">
+							<div class="rom-patcher-row">
+								<div class="text-right">CRC32:</div>
+								<div class="text-truncate"><span id="rom-patcher-span-crc32"></span></div>
+							</div>
+							<div class="rom-patcher-row">
+								<div class="text-right">MD5:</div>
+								<div class="text-truncate"><span id="rom-patcher-span-md5"></span></div>
+							</div>
+							<div class="rom-patcher-row">
+								<div class="text-right">SHA-1:</div>
+								<div class="text-truncate"><span id="rom-patcher-span-sha1"></span></div>
+							</div>
+							<div class="rom-patcher-row" id="rom-patcher-row-info-rom">
+								<div class="text-right"></div>
+								<div class="text-truncate"><span id="rom-patcher-span-rom-info"></span></div>
+							</div>
+						</div>
+
+						<div class="rom-patcher-row margin-bottom" id="rom-patcher-row-file-patch">
+							<div class="text-right"><label for="rom-patcher-input-file-patch" data-localize="yes">עבור ה{(entry.data.type)}:</label>
+							</div>
+							<div class="rom-patcher-container-input">
+								<select id="rom-patcher-select-patch"></select>
+							</div>
+						</div>
+						<div class="rom-patcher-row margin-bottom" id="rom-patcher-row-patch-description">
+							<div class="text-right text-mono text-muted" data-localize="yes">Description:</div>
+							<div class="text-truncate" id="rom-patcher-patch-description"></div>
+						</div>
+						<div class="rom-patcher-row margin-bottom text-selectable text-mono text-muted"
+							id="rom-patcher-row-patch-requirements">
+							<div class="text-right text-mono" id="rom-patcher-patch-requirements-type">ROM requirements:</div>
+							<div class="text-truncate" id="rom-patcher-patch-requirements-value"></div>
+						</div>
+
+						<div class="text-center" id="rom-patcher-row-apply">
+							<div id="rom-patcher-row-error-message" class="margin-bottom"><span id="rom-patcher-error-message"></span>
+							</div>
+							<button id="rom-patcher-button-apply" data-localize="yes" disabled>Apply patch</button>
+						</div>
+					</div>
+				</div>
+			}
+
 			<Comments />
 		</main>
 	</div>
@@ -235,8 +317,11 @@ if (entry.data.weblateTranslateName) {
 		display: flex;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 		margin-inline:auto;
+		flex-wrap: wrap;
     }
-
+	.window-container > :nth-child(3) {
+		width: 100%;
+	}
 
 	.text-section {
 		flex: 1;

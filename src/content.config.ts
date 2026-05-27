@@ -9,6 +9,8 @@ export const collections = {
 		schema: z.object({
 			title: z.string(),
 			type: z.string(),
+			need_patch: z.boolean(),
+			patch: z.string().optional(),
 			map_version: z.string().optional(),
 			title_heb: z.string().optional(),
 			description: z.string().optional(),
@@ -28,6 +30,7 @@ export const collections = {
 			discord: z.string().optional(),
 			translatePack: z.string().optional(),
 			downloadFile: z.string().optional(),
+			downloadPatch: z.string().optional(),
 			translateMap: z.string().optional(),
 			translateDataPack: z.string().optional(),
 			PlayerAmount: z.string().optional(),

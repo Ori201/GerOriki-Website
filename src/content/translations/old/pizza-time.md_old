@@ -1,8 +1,9 @@
 ---
-title: תרגום למפה- Pizza Time
-title_heb: זמן פיצה
+title: Pizza Time
+title_heb: זמן הפיצה
 publishDate: 2019-12-01 00:00:00
 type: "מפה"
+need_patch: true
 
 version: "1.20.5"
 websiteX: https://x.com/VerartTeam

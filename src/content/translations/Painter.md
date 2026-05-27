@@ -5,6 +5,8 @@ publishDate: 2025-04-10 00:00:00
 type: "מפה"
 #description: תיאור
 
+need_patch: true
+patch: "Painter.xdelta"
 PlayerAmount: 1-2
 version: "1.21.3"
 creatorName: "Water_Studio"

@@ -4,6 +4,7 @@ title_heb: השעה האחרונה
 publishDate: 2025-4-06 00:00:00
 type: "מפה"
 
+need_patch: false
 version: "1.18.2"
 creatorName: "Double-T"
 
