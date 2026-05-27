@@ -222,10 +222,9 @@ if (entry.data.weblateTranslateName) {
 								allowDropFiles: false /* if true, it adds basic drag and drop support */
 							};
 							RomPatcherWeb.initialize(myPatcherSettings, {
-								file: '/files/patches/'+entryData.patch,
+								file: '/files/patches/'+entryData.patch.name,
 								name: entryData.title, //patch name that will appear in the dropdown button
-								//inputCrc32: 0xdeadbeef, //add CRC32 checksum validation to patch
-								//inputMd5: 'cafebabecafebabecafebabecafebabe', //add MD5 checksum validation to patch (must be a string!)
+								inputCrc32: entryData.patch.CRC32, //add CRC32 checksum validation to patch
 								//description: 'This patch translates the game and fixes bugs!', //short description that will appear when user picks this patch
 								outputName: 'My game (Hack)' //patched ROM name
 							});
@@ -278,7 +277,7 @@ if (entry.data.weblateTranslateName) {
 						<div class="text-center" id="rom-patcher-row-apply">
 							<div id="rom-patcher-row-error-message" class="margin-bottom"><span id="rom-patcher-error-message"></span>
 							</div>
-							<button id="rom-patcher-button-apply" data-localize="yes" disabled>Apply patch</button>
+							<button id="rom-patcher-button-apply" data-localize="yes" disabled>הורדה</button>
 						</div>
 					</div>
 				</div>

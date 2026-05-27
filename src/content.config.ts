@@ -10,7 +10,7 @@ export const collections = {
 			title: z.string(),
 			type: z.string(),
 			need_patch: z.boolean(),
-			patch: z.string().optional(),
+			patch: z.json().optional(),
 			map_version: z.string().optional(),
 			title_heb: z.string().optional(),
 			description: z.string().optional(),

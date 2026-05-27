@@ -35,7 +35,7 @@
 	- switch to ES6 classes and modules?
 */
 
-const ROM_PATCHER_JS_PATH = './rom-patcher-js/';
+const ROM_PATCHER_JS_PATH = '/rom-patcher-js/';
 
 const RomPatcherWeb = (function () {
 	const SCRIPT_DEPENDENCIES = [
@@ -1678,7 +1678,7 @@ const PatchBuilderWeb = (function (romPatcherWeb) {
 				});
 			});
 			document.getElementById('patch-builder-button-create').addEventListener('click', function () {
-				const patchFormat = document.getElementById('patch-builder-select-patch-type').value;
+				const patchFormat=document.getElementById('patch-builder-select-patch-type').value;
 				_setElementsStatus(false);
 				_setCreateButtonSpinner(true);
 				webWorkerCreate.postMessage(
@@ -1688,9 +1688,9 @@ const PatchBuilderWeb = (function (romPatcherWeb) {
 						format: patchFormat,
 						metadata: _buildMetadataObject(patchFormat)
 					}, [
-					originalRom._u8array.buffer,
-					modifiedRom._u8array.buffer
-				]
+						originalRom._u8array.buffer,
+						modifiedRom._u8array.buffer
+					]
 				);
 			});
 
@@ -1753,6 +1753,39 @@ const ROM_PATCHER_LOCALE = {
 		'Error unzipping file': 'Erreur lors de la décompression du fichier',
 		'Invalid patch file': 'Fichier patch invalide',
 		'Using big files is not recommended': 'L\'utilisation de gros fichiers n\'est pas recommandée'
+	},
+	'he': {
+		'Creator mode': 'מצב מפתח',
+		'Settings': 'הגדרות',
+		'Use patch name for output': 'Use patch name for output',
+		'Light theme': 'Light theme',
+
+		'Apply patch': 'הורדה',
+		'ROM file:': 'ROM file:',
+		'Patch file:': 'Patch file:',
+		'Remove %s header': 'Remove %s header',
+		//'Add %s header': 'Add %s header',
+		'Compatible formats:': 'Compatible formats:',
+		//'Description:': 'Description:',
+		//'Required ROM:': 'Required ROM:',
+		//'Required %s:': 'Required %s:',
+		'Applying patch...': 'מוריד...',
+		'Downloading...': 'מוריד...',
+		'Unzipping...': 'מחלץ...',
+
+		'Create patch': 'Create patch',
+		'Original ROM:': 'Original ROM:',
+		'Modified ROM:': 'Modified ROM:',
+		'Patch type:': 'Patch type:',
+		'Creating patch...': 'Creating patch...',
+
+		'Source ROM checksum mismatch': 'Source ROM checksum mismatch',
+		'Target ROM checksum mismatch': 'Target ROM checksum mismatch',
+		'Patch checksum mismatch': 'Patch checksum mismatch',
+		'Error downloading %s': 'Error downloading %s',
+		'Error unzipping file': 'Error unzipping file',
+		'Invalid patch file': 'Invalid patch file',
+		'Using big files is not recommended': 'Using big files is not recommended'
 	},
 	'de': {
 		'Creator mode': 'Erstellmodus',
