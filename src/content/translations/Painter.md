@@ -25,10 +25,10 @@ youtube_video:
   - https://www.youtube.com/embed/Q_P9hs0vzNQ
 img:
   - /assets/translations/painter.png
-  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.02_1.png
-  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.03.23_1.png
-  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.57_1.png
-  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.18_1.png
+  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.02_1.png
+  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.03.23_1.png
+  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.57_1.png
+  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.18_1.png
 
 tags:
   - מפה למיינקראפט
