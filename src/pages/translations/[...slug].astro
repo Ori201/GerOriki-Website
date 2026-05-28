@@ -68,13 +68,22 @@ if (entry.data.weblateTranslateName) {
 
 <BaseLayout title={`תרגום ל${entry.data.type} - ${entry.data.title}`} description={entry.data.description}>
 
-	<div class="stack gap-2" dir="rtl">
+	<div class="stack" dir="rtl">
 		<header>
 			<div class="wrapper stack gap-2">
 				<a class="back-link" href="/translations/">חזרה</a>
 				<Hero title={(entry.data.title_heb ? entry.data.title_heb : entry.data.title) + " - תרגום לעברית"} align="start">
 					<div class="details">
-						{ entry.data.map_version }
+						<div class="versions-info">
+							{ entry.data.map_version &&
+								<p>גרסת {entry.data.type}: {entry.data.map_version}<br/></p>
+							}
+
+							{ entry.data.translateVersion &&
+								<p>גרסת תרגום: {entry.data.translateVersion}<br/></p>
+							}
+						</div>
+
 						<div class="tags">
 							{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
 						</div>
@@ -162,8 +171,8 @@ if (entry.data.weblateTranslateName) {
 								הורדת התרגום (חבילת משאבים)
 							</a>
 						}
-						{entry.data.downloadPatch &&
-							<a href={entry.data.downloadPatch} target="_blank" download class="cta-button">
+						{entry.data.patch &&
+							<a href={'/files/patches/'+entry.data.patch.name} target="_blank" download class="cta-button">
 								הורדת ה- Patch
 							</a>
 						}
@@ -206,10 +215,10 @@ if (entry.data.weblateTranslateName) {
 						<SwiperButtonPrev />
 						<SwiperButtonNext />
 					</Swiper>
-
 				</div>
+			</div>
 
-				{entry.data.need_patch &&
+				{entry.data.patch &&
 
 					<link rel="stylesheet" href="/rom-patcher-js/style.css" />
 					<script is:inline src="/rom-patcher-js/RomPatcher.webapp.js"></script>
@@ -218,20 +227,20 @@ if (entry.data.weblateTranslateName) {
 						window.addEventListener('load', function(){
 								const myPatcherSettings={
 								language: 'he',
-								requireValidation: false, /* if true, user won't be able to apply patch if the provided ROM is not valid*/
-								allowDropFiles: false /* if true, it adds basic drag and drop support */
+								requireValidation: false,
+								allowDropFiles: false
 							};
 							RomPatcherWeb.initialize(myPatcherSettings, {
 								file: '/files/patches/'+entryData.patch.name,
-								name: entryData.title, //patch name that will appear in the dropdown button
-								inputCrc32: entryData.patch.CRC32, //add CRC32 checksum validation to patch
-								//description: 'This patch translates the game and fixes bugs!', //short description that will appear when user picks this patch
-								outputName: 'My game (Hack)' //patched ROM name
+								name: entryData.title,
+								inputCrc32: entryData.patch.CRC32,
+								//description: '',
+								outputName: entryData.title + " ["+entryData.map_version+"]" +" - Hebrew ["+entryData.translateVersion+"]"
 							});
 						});
 					</script>
 
-					<div id="rom-patcher-container">
+					<div id="rom-patcher-container" class="rounded-image">
 						<div class="rom-patcher-row margin-bottom" id="rom-patcher-row-file-rom">
 							<div class="text-right"><label for="rom-patcher-input-file-rom" data-localize="yes">הקובץ המקורי של ה{(entry.data.type)}:</label></div>
 							<div class="rom-patcher-container-input">
@@ -277,7 +286,7 @@ if (entry.data.weblateTranslateName) {
 						<div class="text-center" id="rom-patcher-row-apply">
 							<div id="rom-patcher-row-error-message" class="margin-bottom"><span id="rom-patcher-error-message"></span>
 							</div>
-							<button id="rom-patcher-button-apply" data-localize="yes" disabled>הורדה</button>
+							<button id="rom-patcher-button-apply" class="" data-localize="yes" disabled>הורדה</button>
 						</div>
 					</div>
 				</div>
@@ -289,6 +298,14 @@ if (entry.data.weblateTranslateName) {
 </BaseLayout>
 
 <style>
+
+	#rom-patcher-container {
+		margin-top: 20px;
+		border-radius: 20px;
+		background-color: azure;
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+	}
+
 	.buttons {
 		background-color: #73efff6e;
 		display: grid;
@@ -298,9 +315,19 @@ if (entry.data.weblateTranslateName) {
 		min-width: 20ch;
 	}
 	.swiper {
-		width: 600px;
-		aspect-ratio: 16/9;
-	}
+        width: 100%;
+        max-width: 700px;
+        aspect-ratio: 16/9;
+    }
+
+    .image-section {
+        flex: 1;
+        padding: 0 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 0;
+    }
 
 	img, iframe {
 		max-width: 100%;
@@ -316,11 +343,7 @@ if (entry.data.weblateTranslateName) {
 		display: flex;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 		margin-inline:auto;
-		flex-wrap: wrap;
     }
-	.window-container > :nth-child(3) {
-		width: 100%;
-	}
 
 	.text-section {
 		flex: 1;
@@ -351,15 +374,6 @@ if (entry.data.weblateTranslateName) {
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		font-weight: bold;
-	}
-
-	.image-section {
-		flex: 1;
-		padding-left: 8%;
-		padding-right: 4%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 
 	.rounded-image {
@@ -396,18 +410,19 @@ if (entry.data.weblateTranslateName) {
 	@media (max-width: 1070px) {
 		.window-container {
 			flex-direction: column;
-			margin: 10px;
 		}
 
 		.text-section {
 			padding: 30px 30px;
         	order: 2;
     	}
-    	.image-section {
-			margin-top: 8%;
-			padding-right: 8%;
-       		order: 1;
-    	}
+		.image-section {
+            margin-top: 8%;
+            padding: 0 20px;
+            order: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
 
 		.text-section, .image-section {
 			flex: none;

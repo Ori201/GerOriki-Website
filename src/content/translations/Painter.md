@@ -5,12 +5,12 @@ publishDate: 2025-04-10 00:00:00
 type: "מפה"
 #description: תיאור
 
-need_patch: true
-
 patch: { name: "Painter.xdelta", CRC32: "0x18635c53" }
 
 PlayerAmount: 1-2
 version: "1.21.3"
+translateVersion: "v1"
+map_version: "v14.5.2025"
 creatorName: "Water_Studio"
 
 downloadFile: "https://drive.google.com/file/d/1bPELiwqvNwDBGP9YL-rtjsT2k6-k4qk2/view?usp=sharing"
@@ -25,6 +25,11 @@ youtube_video:
   - https://www.youtube.com/embed/Q_P9hs0vzNQ
 img:
   - /assets/translations/painter.png
+  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.02_1.png
+  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.03.23_1.png
+  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.57_1.png
+  - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.18_1.png
+
 tags:
   - מפה למיינקראפט
   - תרגום לשפה העברית

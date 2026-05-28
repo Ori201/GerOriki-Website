@@ -1768,7 +1768,7 @@ const ROM_PATCHER_LOCALE = {
 		'Compatible formats:': 'Compatible formats:',
 		//'Description:': 'Description:',
 		//'Required ROM:': 'Required ROM:',
-		//'Required %s:': 'Required %s:',
+		'Required %s:': '%s דרוש:',
 		'Applying patch...': 'מוריד...',
 		'Downloading...': 'מוריד...',
 		'Unzipping...': 'מחלץ...',

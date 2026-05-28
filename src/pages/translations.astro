@@ -4,32 +4,155 @@ import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import TranslationsPreview from '../components/TranslationsPreview.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import "tailwindcss";
 
 const projects = (await getCollection('translations')).sort(
-	(a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+    (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
 );
+
+const allTypes = [...new Set(projects.map(p => p.data.type).filter(Boolean))];
+
+// שליפת כל הגרסאות האפשריות
+const allVersions = [...new Set(projects.map(p => p.data.version || p.data.map_version).filter(Boolean))].sort().reverse();
+
+const pluralNames = {
+    "מפה": "מפות",
+    "מוד": "מודים",
+    // "חבילת נתונים": "חבילות נתונים",
+    // "חבילת משאבים": "חבילות משאבים"
+};
+
 ---
 
 <BaseLayout
-	title="תרגומים | GerOriki"
-	description=""
+    title="תרגומים | GerOriki"
+    description=""
 >
-	<div class="stack gap-20" dir="rtl">
-		<main class="wrapper stack gap-8">
-			<Hero
-				title="התרגומים שלי"
-				tagline=`כאן ניתן למצוא את <b>רוב</b> התרגומים למפות, מודים וחבילות הנתונים שתרגמתי למיינקראפט`
-				align="start"
-			/>
-			<Grid variant="offset">
-				{
-					projects.map((project) => (
-						<li>
-							<TranslationsPreview project={project} />
-						</li>
-					))
-				}
-			</Grid>
-		</main>
-	</div>
+    <div class="stack gap-20" dir="rtl">
+        <main class="wrapper stack gap-8">
+            <Hero
+                title="התרגומים שלי"
+                tagline=`כאן ניתן למצוא את <b>רוב</b> התרגומים למפות, מודים וחבילות הנתונים שתרגמתי למיינקראפט`
+                align="start"
+            />
+
+            <div class="controls bg-[#1a1a2e] border border-[#2d2d44] p-6 rounded-2xl shadow-lg mb-4">
+
+                <div style="margin-bottom: 15px;">
+                    <input
+                        type="text"
+                        id="search-input"
+                        placeholder="חפש תרגום..."
+                        class="w-full bg-[#0f0f1a] text-white border border-[#3f3f5a] rounded-lg px-4 py-3 focus:outline-none focus:border-[#4ba28f] transition"
+                    />
+                </div>
+
+                <div class="grid grid-cols-[auto_1fr] gap-x-4 gap-y-4 items-center">
+
+                    <span class="text-gray-400 text-sm font-bold whitespace-nowrap">סנן לפי סוג:</span>
+                    <div class="flex flex-wrap gap-3">
+                        <button type="button" class="filter-btn bg-[#4ba28f] text-white px-4 py-1.5 rounded-lg text-sm font-bold transition" data-custom-filter="all">הכל</button>
+
+                        {allTypes.map(type => (
+                            <button type="button" class="filter-btn bg-[#2d2d44] text-gray-200 px-4 py-1.5 rounded-lg text-sm transition" data-custom-filter={`.type-${type.replace(/\s+/g, '-')}`}>
+                                {pluralNames[type] || type}
+                            </button>
+                        ))}
+                    </div>
+
+                    <span class="text-gray-400 text-sm font-bold whitespace-nowrap">סנן לפי גרסה:</span>
+                    <div class="flex">
+                        <select id="version-select" class="bg-[#2d2d44] text-gray-200 border border-[#3f3f5a] rounded-lg px-4 py-1.5 text-sm transition focus:outline-none focus:border-[#4ba28f] cursor-pointer min-w-[140px]">
+                            <option value="all">כל הגרסאות</option>
+                            {allVersions.map(version => (
+                                <option value={version}>{version}</option>
+                            ))}
+                        </select>
+                    </div>
+				</div>
+            </div>
+
+            <div id="mix-container">
+                <Grid variant="small">
+                    {
+                        projects.map((project) => (
+                            <li
+                                class={`mix type-${(project.data.type || '').replace(/\s+/g, '-')}`} 
+                                data-title={project.data.title?.toLowerCase() || ''}
+                                data-version={project.data.version || project.data.map_version || 'none'}
+                            >
+                                <TranslationsPreview project={project} />
+                            </li>
+                        ))
+                    }
+                </Grid>
+            </div>
+        </main>
+    </div>
 </BaseLayout>
+
+<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+        var containerEl = document.getElementById('mix-container');
+        var searchInput = document.getElementById('search-input');
+        var filterBtns = document.querySelectorAll('.filter-btn');
+        var versionSelect = document.getElementById('version-select');
+
+        if (containerEl) {
+            var mixer = mixitup(containerEl, {
+                animation: { duration: 300 },
+                selectors: { target: '.mix' }
+            });
+
+            var currentCategory = 'all';
+            var currentSearch = '';
+            var currentVersion = 'all';
+
+            function triggerFilter() {
+                var selector = (currentCategory === 'all') ? '.mix' : currentCategory;
+
+                if (currentVersion !== 'all') {
+                    selector += '[data-version="' + currentVersion + '"]';
+                }
+
+                if (currentSearch !== '') {
+                    selector += '[data-title*="' + currentSearch + '"]';
+                } else if (currentCategory === 'all' && currentVersion === 'all') {
+                    selector = 'all';
+                }
+
+                mixer.filter(selector);
+            }
+
+            var keyupTimeout;
+            searchInput.addEventListener('input', function() {
+                currentSearch = this.value.toLowerCase().trim();
+                clearTimeout(keyupTimeout);
+                keyupTimeout = setTimeout(triggerFilter, 350);
+            });
+
+            if (versionSelect) {
+                versionSelect.addEventListener('change', function() {
+                    currentVersion = this.value;
+                    triggerFilter();
+                });
+            }
+
+            filterBtns.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(function(b) {
+                        b.classList.remove('bg-[#4ba28f]', 'text-white', 'font-bold');
+                        b.classList.add('bg-[#2d2d44]', 'text-gray-200');
+                    });
+                    this.classList.remove('bg-[#2d2d44]', 'text-gray-200');
+                    this.classList.add('bg-[#4ba28f]', 'text-white', 'font-bold');
+
+                    currentCategory = this.getAttribute('data-custom-filter');
+                    triggerFilter();
+                });
+            });
+        }
+    });
+</script>

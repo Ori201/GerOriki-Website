@@ -26,7 +26,7 @@
 
 /* Rom Pacher JS - text classes */
 #rom-patcher-container .text-mono {
-	font-family: 'Roboto Mono', monospace;
+	/* font-family: 'Roboto Mono', monospace; */
 	font-size: 12px;
 }
 
