@@ -5,8 +5,9 @@ publishDate: 2025-07-28 00:00:00
 type: "מוד"
 #description: תיאור
 
-need_patch: false
-version: "Fabric 1.20.2"
+version:
+  - "Fabric 1.20.2"
+
 creatorName: "EightSidedSquare"
 
 downloadFile: "https://modrinth.com/mod/wyr/version/1.0.0"
@@ -26,6 +27,7 @@ tags:
   - מוד למיינקראפט
   - תרגום לשפה העברית
 ---
+
 #### אופן ההתקנה
 
 ● הורדת [Fabric 1.20.2](https://fabricmc.net/)

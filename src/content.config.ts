@@ -19,7 +19,7 @@ export const collections = {
       img_alt: z.string().optional(),
       video: z.string().optional(),
       websiteX: z.string().optional(),
-      version: z.string().optional(),
+      version: z.array(z.string()).optional(),
       creatorName: z.string().optional(),
       youtube_video: z.array(z.string()).optional(),
       ko_fi: z.string().optional(),

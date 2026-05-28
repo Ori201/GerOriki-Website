@@ -3,13 +3,14 @@ title: Yoodexy's Mod
 publishDate: 2025-12-31 00:00:00
 type: "מפה"
 
-need_patch: false
 description: "מפת אימה מרובת משתתפים. בחרו את התפקיד שלכם: הפכו לשורדים המנסים לברוח ממתחם \"ISO-3\" האפל, או השתלטו על הרובוט האנימטרוני, שמטרתו להשמיד את כל היצורים החיים. תמצאו כאן 3 דרכי מילוט ייחודיות, יכולת לזחול, מצלמות אבטחה, תחפושות וחפצים נסתרים המשפיעים על הזמן. האם תצליחו לשרוד?"
 
 # "A Multiplayer horror map with asymmetrical gameplay. Choose your role: become a survivor trying to escape the gloomy \"ISO-3\" complex or take control of the ANIMATRONIC whose goal is to destroy all living things. You'll find 3 unique escape routes, the ability to crawl, working surveillance cameas, cosmetics, and secret artifacts that manipulate time. Can you survive?"
 
 PlayerAmount: "2+"
-version: "1.21.8"
+version:
+  - "1.21.8"
+
 map_version: "v1.0"
 creatorName: "MiraMappa"
 

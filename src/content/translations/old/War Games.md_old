@@ -1,39 +1,55 @@
 ---
-title: Painter
-title_heb: צייר
+title: War Games
+title_heb: משחקי המלחמה
 publishDate: 2025-04-10 00:00:00
 type: "מפה"
 #description: תיאור
 
-patch: { name: "Painter.xdelta", CRC32: "0x18635c53" }
+#patch: { name: "Painter.xdelta", CRC32: "0x18635c53" }
 
-PlayerAmount: 1-2
+PlayerAmount: 2-4
 version:
-  - "1.21.3"
-translateVersion: "v1"
-map_version: "v14.5.2025"
-creatorName: "Water_Studio"
+  - "1.21.6"
+  - "1.21.7"
+  - "1.21.8"
 
-downloadFile: "https://drive.google.com/file/d/1bPELiwqvNwDBGP9YL-rtjsT2k6-k4qk2/view?usp=sharing"
-#translateDataPack: "/files/datapacks/paint.zip"
-#translateMap: "/files/Painter - Hebrew.zip"
-#downloadPatch: "/files/patches/Painter.xdelta"
+#translateVersion: "v1"
+map_version: "v15.8.2025"
+creatorName: "Mundi Maps"
 
-youtube: https://www.youtube.com/channel/UCcA6ZuwhsDEbKCOYQT2EfsQ
+downloadFile: "https://www.planetminecraft.com/project/war-games/"
 
 youtube_video:
-  - https://www.youtube.com/embed/SQNccjUfzd8
-  - https://www.youtube.com/embed/Q_P9hs0vzNQ
+  - https://www.youtube.com/embed/o1jyHLh19AQ
+
 img:
-  - /assets/translations/painter.png
-  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.02_1.png
-  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.03.23_1.png
-  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.57_1.png
-  # - https://minecraft-inside.ru/uploads/files/2025-02/2025-02-12_16.10.18_1.png
+  - https://static.planetminecraft.com/files/image/minecraft/project/2025/627/19078683-wargamesposter_l.webp
+  - https://static.planetminecraft.com/files/image/minecraft/project/2025/627/19078679-wargames_l.webp
+  - https://static.planetminecraft.com/files/image/minecraft/project/2025/627/19078682-wargames_l.webp
+  - https://static.planetminecraft.com/files/image/minecraft/project/2025/627/19078681-wargames_l.webp
 
 tags:
   - מפה למיינקראפט
   - תרגום לשפה העברית
+
+# Prepare for Battle!
+
+# Starting with only 2 villagers, players will have 25 minutes to build a nation and raise an army. Those armies will then duke it out, and the stronger army will be the victor!
+# Compete in 3 Maps, from the peaceful Forest Clearing to the scorching Vibrant Dunes to the dangerous Crumbling Ruins.
+
+# Take down your friends in the ultimate strategy game!
+# 2-4 Players
+
+# Featuring:
+# -Dynamic Real Time Strategy Gameplay
+# -3 Varied Areas to Conquer
+# -14 Battle-Ready Units
+# -And 18 Unique Buildings!
+
+# DOWNLOAD THE RESOURCE PACK BEFORE PLAYING:
+# https://drive.google.com/file/d/1LBrS2JoG8xDoZLumIxdtPjuUyNajVWls/view?usp=sharing﻿
+
+# Exclusively for Java 1.21.6, 1.21.7, and 1.21.8
 ---
 
 #### אופן ההתקנה

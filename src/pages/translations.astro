@@ -12,8 +12,7 @@ const projects = (await getCollection('translations')).sort(
 
 const allTypes = [...new Set(projects.map(p => p.data.type).filter(Boolean))];
 
-// שליפת כל הגרסאות האפשריות
-const allVersions = [...new Set(projects.map(p => p.data.version || p.data.map_version).filter(Boolean))].sort().reverse();
+const allVersions = [...new Set(projects.map(p => p.data.version).flat())].filter(Boolean).sort().reverse();
 
 const pluralNames = {
     "מפה": "מפות",
@@ -76,10 +75,10 @@ const pluralNames = {
                 <Grid variant="small">
                     {
                         projects.map((project) => (
-                            <li
-                                class={`mix type-${(project.data.type || '').replace(/\s+/g, '-')}`} 
-                                data-title={project.data.title?.toLowerCase() || ''}
-                                data-version={project.data.version || project.data.map_version || 'none'}
+							<li
+                                class={`mix type-${(project.data.type || '').replace(/\s+/g, '-')}`}
+                                data-title={`${project.data.title?.toLowerCase() || ''} ${project.data.title_heb?.toLowerCase() || ''}`}
+                                data-version={Array.isArray(project.data.version) ? project.data.version.join(',') : (project.data.version || project.data.map_version || 'none')}
                             >
                                 <TranslationsPreview project={project} />
                             </li>
@@ -113,9 +112,9 @@ const pluralNames = {
             function triggerFilter() {
                 var selector = (currentCategory === 'all') ? '.mix' : currentCategory;
 
-                if (currentVersion !== 'all') {
-                    selector += '[data-version="' + currentVersion + '"]';
-                }
+				if (currentVersion !== 'all') {
+					selector += '[data-version*="' + currentVersion + '"]';
+				}
 
                 if (currentSearch !== '') {
                     selector += '[data-title*="' + currentSearch + '"]';
